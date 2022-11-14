@@ -15851,6 +15851,11 @@ paths:
           * `http://www.w3.org/2001/04/xmldsig-more#sha384` - SHA384
           * `http://www.w3.org/2001/04/xmlenc#sha512` - SHA512
       - in: query
+        name: invalidation_flow
+        schema:
+          type: string
+          format: uuid
+      - in: query
         name: issuer
         schema:
           type: string
@@ -27903,6 +27908,7 @@ components:
       - $ref: '#/components/schemas/PlexAuthenticationChallenge'
       - $ref: '#/components/schemas/PromptChallenge'
       - $ref: '#/components/schemas/RedirectChallenge'
+      - $ref: '#/components/schemas/SessionEndChallenge'
       - $ref: '#/components/schemas/ShellChallenge'
       - $ref: '#/components/schemas/UserLoginChallenge'
       discriminator:
@@ -27929,6 +27935,7 @@ components:
           ak-source-plex: '#/components/schemas/PlexAuthenticationChallenge'
           ak-stage-prompt: '#/components/schemas/PromptChallenge'
           xak-flow-redirect: '#/components/schemas/RedirectChallenge'
+          ak-stage-session-end: '#/components/schemas/SessionEndChallenge'
           xak-flow-shell: '#/components/schemas/ShellChallenge'
           ak-stage-user-login: '#/components/schemas/UserLoginChallenge'
     ClientTypeEnum:
@@ -30597,6 +30604,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -30693,6 +30705,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -31341,6 +31358,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -31463,6 +31485,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -36107,6 +36134,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -36342,6 +36374,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -36810,6 +36847,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -36898,6 +36940,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -36974,6 +37021,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38226,6 +38278,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38290,6 +38347,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38456,6 +38518,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38590,6 +38657,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38712,6 +38784,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -38776,6 +38853,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -39039,6 +39121,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -39201,6 +39288,11 @@ components:
           type: string
           format: uuid
           description: Flow used when authorizing this provider.
+        invalidation_flow:
+          type: string
+          format: uuid
+          nullable: true
+          description: Flow used ending the session from a provider.
         property_mappings:
           type: array
           items:
@@ -39880,6 +39972,31 @@ components:
       required:
       - healthy
       - version
+    SessionEndChallenge:
+      type: object
+      description: Challenge for ending a session
+      properties:
+        type:
+          $ref: '#/components/schemas/ChallengeChoices'
+        flow_info:
+          $ref: '#/components/schemas/ContextualFlowInfo'
+        component:
+          type: string
+          default: ak-stage-session-end
+        response_errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ErrorDetail'
+        pending_user:
+          type: string
+        pending_user_avatar:
+          type: string
+      required:
+      - pending_user
+      - pending_user_avatar
+      - type
     SessionUser:
       type: object
       description: |-
