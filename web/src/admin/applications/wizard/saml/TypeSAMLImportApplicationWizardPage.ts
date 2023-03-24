@@ -30,13 +30,18 @@ export class TypeSAMLImportApplicationWizardPage extends WizardFormPage {
         }
         this.host.addActionBefore(t`Create provider`, async (): Promise<boolean> => {
             // Get all flows and default to the implicit authorization
-            const flows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList({
+            const authorizationFlows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList({
                 designation: FlowDesignationEnum.Authorization,
+                ordering: "slug",
+            });
+            const invalidationFlows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList({
+                designation: FlowDesignationEnum.Invalidation,
                 ordering: "slug",
             });
             const req: ProvidersSamlImportMetadataCreateRequest = {
                 name: name,
-                authorizationFlow: flows.results[0].slug,
+                authorizationFlow: authorizationFlows.results[0].slug,
+                invalidationFlow: invalidationFlows.results[0].slug,
                 file: data["metadata"] as Blob,
             };
             const provider = await new ProvidersApi(

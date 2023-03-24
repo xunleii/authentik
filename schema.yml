@@ -39264,12 +39264,17 @@ components:
           type: string
           minLength: 1
           description: Visible in the URL.
+        invalidation_flow:
+          type: string
+          minLength: 1
+          description: Visible in the URL.
         file:
           type: string
           format: binary
       required:
       - authorization_flow
       - file
+      - invalidation_flow
       - name
     SAMLProviderRequest:
       type: object
