@@ -81,76 +81,6 @@ export class SAMLProviderFormPage extends ModelForm<SAMLProvider, number> {
                     required
                 />
             </ak-form-element-horizontal>
-            <ak-form-element-horizontal
-                label=${t`Authentication flow`}
-                ?required=${false}
-                name="authenticationFlow"
-            >
-                <ak-search-select
-                    .fetchObjects=${async (query?: string): Promise<Flow[]> => {
-                        const args: FlowsInstancesListRequest = {
-                            ordering: "slug",
-                            designation: FlowsInstancesListDesignationEnum.Authentication,
-                        };
-                        if (query !== undefined) {
-                            args.search = query;
-                        }
-                        const flows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList(args);
-                        return flows.results;
-                    }}
-                    .renderElement=${(flow: Flow): string => {
-                        return RenderFlowOption(flow);
-                    }}
-                    .renderDescription=${(flow: Flow): TemplateResult => {
-                        return html`${flow.name}`;
-                    }}
-                    .value=${(flow: Flow | undefined): string | undefined => {
-                        return flow?.pk;
-                    }}
-                    .selected=${(flow: Flow): boolean => {
-                        return flow.pk === this.instance?.authenticationFlow;
-                    }}
-                >
-                </ak-search-select>
-                <p class="pf-c-form__helper-text">
-                    ${t`Flow used when a user access this provider and is not authenticated.`}
-                </p>
-            </ak-form-element-horizontal>
-            <ak-form-element-horizontal
-                label=${t`Authorization flow`}
-                ?required=${true}
-                name="authorizationFlow"
-            >
-                <ak-search-select
-                    .fetchObjects=${async (query?: string): Promise<Flow[]> => {
-                        const args: FlowsInstancesListRequest = {
-                            ordering: "slug",
-                            designation: FlowsInstancesListDesignationEnum.Authorization,
-                        };
-                        if (query !== undefined) {
-                            args.search = query;
-                        }
-                        const flows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList(args);
-                        return flows.results;
-                    }}
-                    .renderElement=${(flow: Flow): string => {
-                        return RenderFlowOption(flow);
-                    }}
-                    .renderDescription=${(flow: Flow): TemplateResult => {
-                        return html`${flow.name}`;
-                    }}
-                    .value=${(flow: Flow | undefined): string | undefined => {
-                        return flow?.pk;
-                    }}
-                    .selected=${(flow: Flow): boolean => {
-                        return flow.pk === this.instance?.authorizationFlow;
-                    }}
-                >
-                </ak-search-select>
-                <p class="pf-c-form__helper-text">
-                    ${t`Flow used when authorizing this provider.`}
-                </p>
-            </ak-form-element-horizontal>
 
             <ak-form-group .expanded=${true}>
                 <span slot="header"> ${t`Protocol settings`} </span>
@@ -206,9 +136,46 @@ export class SAMLProviderFormPage extends ModelForm<SAMLProvider, number> {
                 </div>
             </ak-form-group>
 
-            <ak-form-group .expanded=${true}>
+            <ak-form-group .expanded=${!this.instance}>
                 <span slot="header"> ${t`Flow settings`} </span>
                 <div slot="body" class="pf-c-form">
+                    <ak-form-element-horizontal
+                        label=${t`Authentication flow`}
+                        name="authenticationFlow"
+                    >
+                        <ak-search-select
+                            .fetchObjects=${async (query?: string): Promise<Flow[]> => {
+                                const args: FlowsInstancesListRequest = {
+                                    ordering: "slug",
+                                    designation: FlowsInstancesListDesignationEnum.Authentication,
+                                };
+                                if (query !== undefined) {
+                                    args.search = query;
+                                }
+                                const flows = await new FlowsApi(DEFAULT_CONFIG).flowsInstancesList(
+                                    args,
+                                );
+                                return flows.results;
+                            }}
+                            .renderElement=${(flow: Flow): string => {
+                                return RenderFlowOption(flow);
+                            }}
+                            .renderDescription=${(flow: Flow): TemplateResult => {
+                                return html`${flow.name}`;
+                            }}
+                            .value=${(flow: Flow | undefined): string | undefined => {
+                                return flow?.pk;
+                            }}
+                            .selected=${(flow: Flow): boolean => {
+                                return flow.pk === this.instance?.authenticationFlow;
+                            }}
+                        >
+                        </ak-search-select>
+                        <p class="pf-c-form__helper-text">
+                            ${t`Flow used when a user access this provider and is not authenticated.`}
+                        </p>
+                    </ak-form-element-horizontal>
+
                     <ak-form-element-horizontal
                         label=${t`Authorization flow`}
                         ?required=${true}
