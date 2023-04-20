@@ -177,6 +177,7 @@ colorama = "*"
 coverage = { extras = ["toml"], version = "*" }
 django-silk = "*"
 importlib-metadata = "*"
+pdoc = "*"
 pylint = "*"
 pylint-django = "*"
 pyrad = "*"
