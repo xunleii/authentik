@@ -88,7 +88,7 @@ RUN apt-get update && \
     apt-get remove --purge -y build-essential pkg-config libxmlsec1-dev && \
     apt-get autoremove --purge -y && \
     apt-get clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/ && \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/ /root/.cache && \
     adduser --system --no-create-home --uid 1000 --group --home /authentik authentik && \
     mkdir -p /certs /media /blueprints && \
     mkdir -p /authentik/.ssh && \
