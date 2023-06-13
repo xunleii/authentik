@@ -16,6 +16,7 @@
         "watch": "run-s build-locales rollup:watch",
         "lint": "eslint . --max-warnings 0 --fix",
         "lit-analyse": "lit-analyzer src",
+        "precommit": "run-s tsc lit-analyse lint prettier",
         "prettier-check": "prettier --check .",
         "prettier": "prettier --write .",
         "tsc:execute": "tsc --noEmit -p .",
