@@ -1,0 +1,18 @@
+name: compress-images
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt install -y imagemagick optipng 
+          find -name '*.jpg' -exec mogrify -strip -compress JPEG {} +
+          find -name '*.png' -exec optipng -fix {} +
+          git diff --exit-code
+        shell: bash
